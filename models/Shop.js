@@ -6,6 +6,7 @@ const shopSchema = new mongoose.Schema({
     type: { type: String, enum: ['restaurant', 'clothing', 'beauty', 'other'], default: 'other' },
     description: { type: String },
     logo: { type: String }, 
+    slug: { type: String, unique: true, required: true },
     telegramBotToken: { type: String }, 
     telegramChatId: { type: String }, 
     createdAt: { type: Date, default: Date.now },
