@@ -70,9 +70,10 @@ router.delete('/:id', requireRole(['shopowner']), async (req, res) => {
 });
 
 // Public: Get products by shop id
-router.get('/shop/:shopId', async (req, res) => {
+router.get('/shops/:slug/products', async (req, res) => {
     try {
-        const products = await Product.find({ shop: req.params.shopId, isActive: true });
+        const products = await Product.find({ shop: req.params.slug, isActive: true });
+        if (!products) return res.status(404).json({ msg: 'No products found for this shop.' });
         res.json(products);
     } catch (err) {
         res.status(500).json({ msg: err.message });
